@@ -222,6 +222,7 @@ contents数组是整数集合的底层实现，整数集合的元素都是conten
 
 2. 压缩列表是Redis为了节约内存而开发的，是由一系列特殊编码的连续内存块组成的顺序型(sequential)数据结构，一个压缩列表可以包含任意多个节点(entry)，每个节点可以保存一个字节数组或者一个整数值
 3. 下表展示了压缩列表的各个组成部分
+
 <table>
   <tr>
     <td> zlbytes </td>
@@ -262,13 +263,14 @@ contents数组是整数集合的底层实现，整数集合的元素都是conten
     ```
 虽然定义了这个结构体，但是根本没有使用zlentry结构作为压缩列表中用来存储数据节点中的结构。因为，这个结构来存小整数或短字符串实在太浪费内存了。这个结构总共在32位机上占用了28个字节，在64位机上占用了32个字节。所以它不符合压缩列表的设计目的：提高内存的利用率。因此，在redis中，并没有使用定义的结构体来操作，而是定义了宏。压缩列表的节点真正结构如下所示：
 
-    <table>
-    <tr>
-    <td> previous_entry_length </td>
-    <td> encoding </td>
-    <td> content </td>
-    </tr>
-    </table>
+<table>
+ <tr>
+ <td> previous_entry_length </td>
+ <td> encoding </td>
+ <td> content </td>
+ </tr>
+ </table>
+ 
 接下来就分别讨论这三个属性
 * previous_entry_length以字节为单位，记录了压缩列表中前一个节点的长度，previous_entry_length属性的长度可以是1字节或5字节
     * 如果前一个节点长度小于254字节，那么previous_entry_length属性的长度为1字节，前一节点的长度就保存在这一字节里面
