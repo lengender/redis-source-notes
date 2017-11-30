@@ -14,9 +14,9 @@ Redis服务器是典型的一对多服务器程序：一个服务器可以与多
     ```
 示例如下：
 
-    <div align = "center">
-    <img src="https://raw.githubusercontent.com/lengender/MarkdownPhotos/master/clients%E9%93%BE%E8%A1%A8.png" width="400" height="400" alt="clients链表"/>
-    </div>
+<div align = "center">
+<img src="https://raw.githubusercontent.com/lengender/MarkdownPhotos/master/clients%E9%93%BE%E8%A1%A8.png" width="400" height="400" alt="clients链表"/>
+</div>
     
 2. 客户端状态包含的属性可以分为两类：
     * 一类是比较通用的属性，这些属性很少与特定功能相关，无论客户端执行的是什么工作，它们都要用到这些属性
